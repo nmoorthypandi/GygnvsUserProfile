@@ -1,15 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>User profile</title>
-  </head>
-  <body>
-    <div class="container">
-      <a href="https://google.com">Click here!</a>
-    </div>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <script src="profile.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .field-title {
+      margin-top: 10px;
+    }
+
+    #profileForm {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* label {
+      font-weight: bold;
+    } */
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      /* width: 100%; */
+    }
+
+    #profilePicture {
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* @media screen and (max-width: 768px) {
+      #profileForm {
+        flex-direction: column-reverse;
+      }
+
+      label {
+        text-align: left;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      button {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+    } */
+  </style>
+</head>
+
+<body>
+<img class="MuiBox-root css-1audqkw" alt="CYGNVS" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI3LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkZpbmFsIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgODY5LjIzIDIxMS44NCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgODY5LjIzIDIxMS44NDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiMwMzAwNTk7fQoJLnN0MXtmaWxsOiMyMTlBN0M7fQo8L3N0eWxlPgo8Zz4KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMjQuMDYsMTU1Ljc1Yy05LjM3LDUuNzgtMTkuMzYsOC43MS0yOS42OCw4LjcxYy0xMS4yMSwwLTIxLjIyLTIuNjktMjkuNzYtOAoJCWMtOC41NC01LjMxLTE1LjIxLTEyLjU0LTE5LjgzLTIxLjQ5Yy00LjY3LTkuMDYtNy4wNS0xOS4wNC03LjA1LTI5LjY4YzAtMTEuMDksMi42LTIxLjQ2LDcuNzItMzAuODEKCQljNS4xMy05LjM2LDEyLjE0LTE2Ljg1LDIwLjg2LTIyLjI1YzguNjctNS4zOCwxOC4yNC04LjExLDI4LjQzLTguMTFjMTAuMzIsMCwyMC4zMSwyLjkzLDI5LjY5LDguNzFsNi4yLDMuODJsOS4xOS0xNi4zMgoJCWwtNi4xNi0zLjgyYy0xMi03LjQzLTI1LjA5LTExLjItMzguOTEtMTEuMmMtMTMuNjksMC0yNi40MiwzLjU2LTM3Ljg0LDEwLjU5Yy0xMS4zOCw3LjAxLTIwLjU1LDE2LjczLTI3LjI1LDI4LjkKCQljLTYuNywxMi4xOC0xMC4xLDI1LjczLTEwLjEsNDAuMjdjMCwxNC4wOSwzLjE1LDI3LjIzLDkuMzcsMzkuMDVjNi4yNSwxMS44OSwxNS4xOCwyMS40OSwyNi41NCwyOC41MgoJCWMxMS4zNiw3LjA0LDI0LjQ1LDEwLjYsMzguOTEsMTAuNmMxNC4wNywwLDI3LjI5LTMuNzcsMzkuMjktMTEuMmw2LjY5LTQuMTVsLTEwLjU5LTE1LjY4TDEyNC4wNiwxNTUuNzV6Ii8+Cgk8cG9seWdvbiBjbGFzcz0ic3QwIiBwb2ludHM9IjIyNS4wNiwxMDQuNjMgMTgwLDI1LjI0IDE1Ny45NSwyNS4yNCAyMTUuNDcsMTI2LjkgMjE1LjQ3LDE4My40MiAyMzQuMywxODMuNDIgMjM0LjMsMTI2Ljg5IAoJCTI5MS42LDI1LjI0IDI2OS43NSwyNS4yNCAJIi8+Cgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzYwLjc5LDEyNC45M2gzMy43OHYzMy40NWMtMy4zNiwxLjUzLTcuMjUsMi44MS0xMS41OSwzLjgyYy02LjIzLDEuNDUtMTIuMzEsMi4xOS0xOC4wNywyLjE5CgkJYy0xMS43LDAtMjIuMTUtMi42Ni0zMS4wNy03LjkxYy04LjktNS4yNC0xNS44OS0xMi40My0yMC43Ny0yMS4zN2MtNC45My05LjA0LTcuNDMtMTkuMjYtNy40My0zMC4zOWMwLTEwLjkzLDIuNy0yMS4xMyw4LjAzLTMwLjMyCgkJYzUuMzQtOS4yMiwxMi43LTE2LjY0LDIxLjg2LTIyLjA0YzkuMTItNS4zOCwxOS4yLTguMSwyOS45Ny04LjFjNS4zNiwwLDEwLjc0LDAuNzcsMTYsMi4yOWM1LjMsMS41MywxMC4yNCwzLjY3LDE0LjcsNi4zNwoJCWw2LjQ5LDMuOTNsOS42Mi0xNi4zNmwtNi40My0zLjgxYy0xMi41Mi03LjQyLTI2LjE3LTExLjE4LTQwLjU5LTExLjE4Yy0xNC4xNSwwLTI3LjQsMy41OS0zOS4zOSwxMC42OAoJCWMtMTEuOTIsNy4wNS0yMS41MywxNi43LTI4LjU4LDI4LjY4Yy03LjA4LDEyLjA0LTEwLjY3LDI1LjQ2LTEwLjY3LDM5Ljg3YzAsMTQuMzMsMy4yOCwyNy42LDkuNzYsMzkuNDYKCQljNi41MywxMS45NywxNS45LDIxLjU2LDI3Ljg0LDI4LjUyYzExLjkxLDYuOTQsMjUuNzEsMTAuNDYsNDEuMDQsMTAuNDZjNy40NSwwLDE1LjM0LTEuMDEsMjMuNDUtM2M4LjIzLTIuMDIsMTUuMzMtNC43NywyMS4xLTguMTgKCQlsMy42OS0yLjE4di02My42NGgtNTIuNzVWMTI0LjkzeiIvPgoJPHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSI1NDkuMzUsMTQ0LjQzIDQ1MS41MiwyNS45NiA0NTEuMDQsMjUuMzYgNDM5LjcsMjUuMzYgNDM5LjcsMTgzLjEgNDU4Ljc5LDE4My4xIDQ1OC42MSw2NC4xNSAKCQk1NTYuNDEsMTgyLjc0IDU1Ni45LDE4My4zMyA1NjguMjIsMTgzLjMzIDU2OC4yMiwyNS4yIDU0OS4zNSwyNS4yIAkiLz4KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik04NDIuNzksMTEyLjEyTDg0Mi43OSwxMTIuMTJjLTQuMzItNi4xMy05Ljc2LTExLTE2LjE3LTE0LjQ4Yy01LjY5LTMuMDktMTIuOTEtNi4yNi0yMS40Ny05LjQ0CgkJYy03LjU1LTIuODEtMTMuNjctNS40Mi0xOC4xOS03Ljc0Yy0zLjg2LTEuOTktNy4xLTQuNTQtOS42My03LjZjLTIuMDYtMi40OS0zLjA3LTUuNS0zLjA3LTkuMTljMC0zLjU4LDAuOTYtNi43NSwyLjkzLTkuNzEKCQljMi4wMy0zLjA1LDQuOTQtNS40MSw4Ljg4LTcuMjNjNC4xOC0xLjkzLDkuMS0yLjkxLDE0LjY0LTIuOTFjNS4wOSwwLDEwLjMzLDAuNjYsMTUuNTcsMS45N2M1LjQzLDEuMzYsMTAuMjcsMi45NywxNC4zOCw0Ljc4CgkJbDYuNDEsMi44M2w4LjU5LTE2LjFsLTcuMDUtMy40MmMtNS4xOC0yLjUxLTExLjUtNC41OS0xOC43OS02LjE4Yy03LjIzLTEuNTctMTMuOC0yLjM3LTE5LjUtMi4zN2MtOC4wMSwwLTE1LjQ3LDEuNTgtMjIuMTgsNC43CgkJYy02LjkyLDMuMjItMTIuNSw3LjgtMTYuNTksMTMuNmMtNC4yMyw2LjAxLTYuMzgsMTIuOTUtNi4zOCwyMC42NWMwLDcuODgsMi4yOCwxNC42OSw2Ljc4LDIwLjI1YzQuMDQsNC45OSw5LjA4LDkuMDgsMTQuOTgsMTIuMTUKCQljNS4yOCwyLjc0LDEyLjE1LDUuNjcsMjAuNDIsOC43YzcuNzYsMi44LDE0LjE1LDUuNTQsMTguOTgsOC4xNWM0LjIyLDIuMjcsNy42NCw1LjI3LDEwLjQ2LDkuMTdjMi41LDMuNDcsMy43Nyw4LjEsMy43NywxMy43OAoJCWMwLDYuMDgtMS4zOSwxMS4wNi00LjI2LDE1LjIxYy0yLjk3LDQuMjktNi42OSw3LjQtMTEuMzksOS41MWMtMTAuMjEsNC41OS0yMi42OCw0LjQtMzUuMTMtMC41M2MtNi43Ny0yLjY4LTEyLjQzLTUuNjctMTYuODMtOC44OAoJCWwtNi45LTUuMDRsLTkuNzEsMTcuNDdsNi4yOSwzLjc1YzUuNzcsMy40NCw5Ljc2LDUuNzYsMTIuMTksNy4xMWMyLjkxLDEuNjIsNy40MywzLjMzLDEzLjgxLDUuMjRjNi40OCwxLjkzLDEzLjU2LDIuOTIsMjEuMDYsMi45MgoJCWM5LjI4LDAsMTcuNzUtMS44OCwyNS4xNy01LjZjNy42NC0zLjgyLDEzLjc0LTkuMzcsMTguMTQtMTYuNDhjNC40LTcuMTEsNi42My0xNS40OCw2LjYzLTI0Ljg3CgkJQzg0OS42NywxMjYuNzIsODQ3LjM1LDExOC41OSw4NDIuNzksMTEyLjEyeiIvPgoJPHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSI2MjcuOTUsMjUuMiA2NjguNzksMTA2Ljg3IDcwOS42MywyNS4yIAkiLz4KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iNTg5LjYsMjUuMiA2MTkuNTEsODUuMDIgNjM4LjY3LDg1LjAyIDYwOC43NiwyNS4yIAkiLz4KPC9nPgo8cG9seWdvbiBjbGFzcz0ic3QxIiBwb2ludHM9IjY2OC43OSwxNDUuMjUgNjQ3LjIxLDEwMi4wOSA2MjguMDQsMTAyLjA5IDY2OC43OSwxODMuNTggNzQ3Ljk4LDI1LjIgNzI4LjgyLDI1LjIgIi8+Cjwvc3ZnPgo=" style="
+    width: 150px;
+    margin-bottom: 15px;
+"/>
+  <h4>User Profile</h4>
+
+  <form id="profileForm">
+    <label class="field-title" for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label class="field-title" for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label class="field-title" for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required>
+
+    <label class="field-title" for="profilePicture">Profile Picture:</label>
+    <input type="file" accept="image/*" id="profilePictureInput" onchange="handleProfilePictureChange()"><br>
+    <img id="profilePicture" src="" alt="" width="100" height="100"><br>
+
+    <button type="button" onclick="openCameraPage()">Add Profile Picture</button>
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+
 </html>
