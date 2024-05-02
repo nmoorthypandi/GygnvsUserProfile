@@ -98,12 +98,32 @@
         window.webkit.messageHandlers.submitForm.postMessage(null);
     });
     
-    function setProfileImage(imageData) {
-        // var img = document.getElementById('profileImage');
-        // img.src = 'data:image/jpeg;base64,' + imageData;
-      const imgElement = document.getElementById('profileImage');
-      imgElement.src = fileUrl;
+  function handleJavaScriptError(error) {
+    if (window.webkit && window.webkit.messageHandlers) {
+        window.webkit.messageHandlers.jsErrorHandler.postMessage(error);
+    } else {
+        console.error("Error handler not available");
     }
+}
+
+function setProfileImage(imageData) {
+    const imgElement = document.getElementById('profileImage');
+    if (!imgElement) {
+        handleJavaScriptError("ProfileImage element not found");
+        return;
+    }
+    
+    if (!imageData) {
+        handleJavaScriptError("Invalid image data");
+        return;
+    }
+    
+    try {
+        imgElement.src = `data:image/jpeg;base64,${imageData}`;
+    } catch (error) {
+        handleJavaScriptError(`Error setting image: ${error.message}`);
+    }
+}
 </script>
 </body>
 
