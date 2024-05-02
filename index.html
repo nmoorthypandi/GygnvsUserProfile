@@ -106,7 +106,7 @@
     }
 }
 
-function setProfileImage(imageData) {
+function setProfileImage(fileUrl) {
     const imgElement = document.getElementById('profileImage');
     if (!imgElement) {
         handleJavaScriptError("ProfileImage element not found");
@@ -119,7 +119,7 @@ function setProfileImage(imageData) {
     }
     
     try {
-        imgElement.src = `data:image/jpeg;base64,${imageData}`;
+        imgElement.src = fileUrl;
     } catch (error) {
         handleJavaScriptError(`Error setting image: ${error.message}`);
     }
