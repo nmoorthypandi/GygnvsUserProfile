@@ -99,8 +99,10 @@
     });
     
     function setProfileImage(imageData) {
-        var img = document.getElementById('profileImage');
-        img.src = 'data:image/jpeg;base64,' + imageData;
+        // var img = document.getElementById('profileImage');
+        // img.src = 'data:image/jpeg;base64,' + imageData;
+      const imgElement = document.getElementById('profileImage');
+      imgElement.src = fileUrl;
     }
 </script>
 </body>
