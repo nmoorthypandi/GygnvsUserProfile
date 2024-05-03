@@ -9,7 +9,6 @@
     body {
       font-family: sans-serif;
       margin: 0;
-      padding: 20px;
     }
 
     h2 {
@@ -25,6 +24,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      padding: 30px;
     }
 
     input[type="text"],
@@ -64,6 +64,7 @@
       <button style="overflow: hidden; margin-bottom: -33px;" type="button" onclick="openCameraPage()">
         <i class="fa fa-camera" style="font-size: 18px;"></i>
       </button>
+      <input type="file" accept="image/*" id="imageInput" style="display: none;">
     </div><br>
     <br>
 
@@ -83,8 +84,23 @@
   <script>
     var profileImageData = "";
     function openCameraPage() {
-      window.webkit.messageHandlers.openCameraPage.postMessage(null);
+      if (window.webkit) {
+        window.webkit.messageHandlers.openCameraPage.postMessage(null);
+      } else {
+        console.log("window.webkit is not supported.");
+        document.getElementById("imageInput").click();
+      }
+
     }
+
+    document.getElementById("imageInput").addEventListener("change", function (event) {
+      var selectedFile = event.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        document.getElementById("profileImage").src = event.target.result;
+      };
+      reader.readAsDataURL(selectedFile);
+    });
 
     document.getElementById('profileForm').addEventListener('submit', function (event) {
       event.preventDefault();
