@@ -104,6 +104,13 @@ function submitForm() {
     var phone = document.getElementById('phone').value;
     var profileImage = document.getElementById('profileImage').src;
 
+   if (profileImage == window.location.href) {
+     alert("Please attach profile image!")
+     return
+   }
+
+   profileImage = profileImage.substring(profileImage.indexOf(',') + 1);
+  
     // Create JSON object with form data
     var formData = {
         name: name,
