@@ -95,8 +95,30 @@
     
     document.getElementById('profileForm').addEventListener('submit', function(event) {
         event.preventDefault(); 
-        window.webkit.messageHandlers.submitForm.postMessage(null);
+        submitForm();
     });
+
+function submitForm() {
+    // Gather form data
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var profileImage = document.getElementById('profileImage').src;
+
+    // Create JSON object with form data
+    var formData = {
+        name: name,
+        email: email,
+        phone: phone,
+        profileImage: profileImage
+    };
+
+    // Convert JSON object to string
+    var jsonData = JSON.stringify(formData);
+
+    // Send JSON data to native iOS code
+    window.webkit.messageHandlers.formSubmitted.postMessage(jsonData);
+}
     
   function handleJavaScriptError(error) {
     if (window.webkit && window.webkit.messageHandlers) {
